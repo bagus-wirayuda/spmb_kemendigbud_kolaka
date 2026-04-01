@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SPMB Online - Pemerintah Kab. Kolaka</title>
+    <!-- Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0284C7', // Lebh formal, cerah (Sky Blue -> Light Blue / Cerulean)
+                        secondary: '#FFFFFF',
+                        accent: '#1E3A8A', // Dark Blue - warna pemerintahan
+                        govred: '#DC2626', // Untuk aksen keberanian/formal
+                        neutralbg: '#F8FAFC',
+                        gold: '#F59E0B'
+                    },
+                    fontFamily: {
+                        poppins: ['Poppins', 'sans-serif'],
+                        inter: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Custom Animations */
+        .fade-in {
+            animation: fadeIn 0.8s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Hide scrollbar for gallery */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+
+<body class="bg-neutralbg text-gray-800 antialiased selection:bg-primary selection:text-white">
+
+    <!-- Top Government Banner -->
+    <div class="bg-accent text-white py-1.5 fixed w-full z-[60] top-0 border-b border-blue-900 shadow-sm">
+        <div
+            class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center text-xs lg:text-sm font-medium">
+            <div class="flex items-center gap-2">
+                <i class="fa-solid fa-school text-yellow-400"></i>
+                <span>SD Negeri 3 Induha</span>
+                <span class="hidden sm:inline border-l border-white/30 pl-2 ml-1">Portal SPMB 2025/2026</span>
+            </div>
+            <div class="hidden md:flex items-center gap-4 text-xs">
+                <span><i class="fa-solid fa-phone mr-1"></i> Call Center: 1500-123</span>
+                <span><i class="fa-regular fa-envelope mr-1"></i> dikbud@kolakakab.go.id</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="bg-secondary shadow-md fixed w-full z-50 transition-all duration-300 top-[32px] lg:top-[36px]"
+        id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20 items-center">
+
+                <!-- Logos -->
+                <div class="flex items-center gap-3">
+                    <img src="logo_kolaka.png" alt="Logo Kolaka" class="h-12 w-auto object-contain drop-shadow-sm">
+                    <div class="hidden lg:flex flex-col ml-1 border-l-2 border-gray-200 pl-3">
+                        <span class="font-poppins font-bold text-lg text-accent leading-tight">SPMB Online</span>
+                        <span class="font-inter font-medium text-xs text-primary leading-tight">SD Negeri 3 Induha</span>
+                    </div>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-6 lg:space-x-8 items-center">
+                    <a href="#sambutan" class="text-gray-700 hover:text-primary font-semibold transition-colors">Sambutan</a>
+                    <a href="#visi-misi" class="text-gray-700 hover:text-primary font-semibold transition-colors">Visi & Misi</a>
+                    <a href="#info" class="text-gray-700 hover:text-primary font-semibold transition-colors">Informasi</a>
+                    <a href="#flow" class="text-gray-700 hover:text-primary font-semibold transition-colors">Alur</a>
+                    <a href="registration.html"
+                        class="bg-accent hover:bg-blue-900 text-white px-6 py-2.5 rounded-lg font-medium transition-all shadow-md hover:shadow-lg transform hover:-translate-y-0.5 register-btn border-b-4 border-blue-900 hover:border-blue-950 flex items-center gap-2">
+                        <i class="fa-regular fa-id-badge"></i> Daftar Sekarang
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-gray-600 hover:text-accent focus:outline-none">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Panel -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 absolute w-full shadow-lg">
+            <div class="px-4 pt-2 pb-6 space-y-2">
+                <a href="#home"
+                    class="block px-3 py-2 text-gray-700 hover:text-primary font-medium hover:bg-gray-50 rounded-lg">Beranda</a>
+                <a href="#sambutan"
+                    class="block px-3 py-2 text-gray-700 hover:text-primary font-medium hover:bg-gray-50 rounded-lg">Sambutan</a>
+                <a href="#visi-misi"
+                    class="block px-3 py-2 text-gray-700 hover:text-primary font-medium hover:bg-gray-50 rounded-lg">Visi & Misi</a>
+                <a href="#info"
+                    class="block px-3 py-2 text-gray-700 hover:text-primary font-medium hover:bg-gray-50 rounded-lg">Informasi</a>
+                <a href="#flow"
+                    class="block px-3 py-2 text-gray-700 hover:text-primary font-medium hover:bg-gray-50 rounded-lg">Alur</a>
+                <div class="pt-4">
+                    <a href="registration.html"
+                        class="block text-center bg-accent text-white px-4 py-3 rounded-lg font-medium shadow register-btn border-b-4 border-blue-900">Daftar
+                        Sekarang</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="pt-40 pb-20 lg:pt-48 lg:pb-28 overflow-hidden relative">
+        <!-- Background Pattern -->
+        <div class="absolute inset-0 opacity-5"
+            style="background-image: url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%231e3a8a\' fill-opacity=\'1\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E'); z-index: -1;">
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="fade-in">
+                    <div
+                        class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-100 text-accent font-bold text-sm mb-6 border border-blue-200">
+                        <i class="fa-solid fa-landmark text-primary"></i> Program Resmi Dinas Pendidikan
+                    </div>
+                    <h1
+                        class="text-4xl lg:text-5xl font-extrabold text-accent leading-tight mb-4 uppercase tracking-wide">
+                        Seleksi penerimaan<br>Murid Baru <span class="text-gold">(SPMB)</span>
+                    </h1>
+                    <h2 class="text-xl lg:text-2xl font-bold text-primary mb-6">
+                        Tahun Ajaran 2025/2026<br>SD Negeri 3 Induha
+                    </h2>
+                    <p
+                        class="text-lg text-gray-600 mb-8 leading-relaxed max-w-lg border-l-4 border-gold pl-4 bg-white/50 py-2 rounded-r-lg">
+                        Mewujudkan pendidikan yang berkualitas, transparan, dan merata untuk seluruh putra-putri daerah
+                        Kabupaten Kolaka. Mari bergabung untuk masa depan yang lebih cerah.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="registration.html"
+                            class="bg-accent hover:bg-blue-900 text-white px-8 py-4 rounded-lg font-medium transition-all shadow-lg text-center transform hover:-translate-y-1 register-btn border-b-4 border-blue-900 flex items-center justify-center gap-2 uppercase tracking-wider text-sm">
+                            <i class="fa-solid fa-file-pen text-lg"></i> Mulai Pendaftaran
+                        </a>
+                        <a href="#panduan"
+                            class="bg-white hover:bg-gray-50 text-accent border border-gray-300 px-8 py-4 rounded-lg font-bold transition-all text-center flex items-center justify-center gap-2 uppercase tracking-wider text-sm shadow-sm">
+                            <i class="fa-solid fa-book-open"></i> Unduh Panduan (PDF)
+                        </a>
+                    </div>
+                </div>
+
+                <div class="relative fade-in hidden lg:block" style="animation-delay: 0.2s;">
+                    <!-- Hero Image Composition -->
+                    <div
+                        class="absolute inset-0 bg-accent rounded-3xl transform rotate-3 scale-105 -z-10 shadow-xl opacity-20">
+                    </div>
+                    <div
+                        class="absolute inset-0 bg-primary rounded-3xl transform -rotate-2 scale-105 -z-10 shadow-xl opacity-50">
+                    </div>
+
+                    <img src="schol.jpeg" alt="Siswa SD/SMP Belajar"
+                        class="rounded-3xl shadow-2xl object-cover h-[450px] w-full border-4 border-white">
+
+                    <!-- Floating Stat -->
+                    <div
+                        class="absolute -bottom-6 -left-8 bg-white p-5 rounded-2xl shadow-xl flex items-center gap-4 border border-gray-100">
+                        <div
+                            class="w-14 h-14 bg-blue-50 rounded-full flex items-center justify-center text-primary text-2xl">
+                            <i class="fa-solid fa-school"></i>
+                        </div>
+                        <div>
+                            <p class="text-xs text-gray-500 font-bold uppercase tracking-wider">Terintegrasi dengan</p>
+                            <p class="font-bold text-accent text-xl">250+ Sekolah</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sambutan Kepala Sekolah (Premium Layout) -->
+    <section id="sambutan" class="py-24 bg-white relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-64 h-64 bg-sky-100/30 rounded-full filter blur-3xl opacity-50"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div class="relative group">
+                    <div class="absolute inset-0 bg-blue-100 rounded-[3rem] transform -rotate-3 transition-transform group-hover:rotate-0 border-2 border-white"></div>
+                    <div class="relative rounded-[2.5rem] shadow-2xl w-full h-[480px] overflow-hidden border-8 border-white bg-slate-50 flex items-center justify-center p-4">
+                        <img src="ks.png" alt="Kepala Sekolah" 
+                            class="w-full h-full object-cover rounded-2xl transition-transform duration-700 group-hover:scale-110"
+                            style="object-position: center 5%;">
+                    </div>
+                </div>
+                <div>
+                    <span class="text-primary font-bold tracking-widest uppercase text-sm mb-2 block">Sambutan Kepala Sekolah</span>
+                    <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-6 leading-tight">Membangun Karakter Melalui Pendidikan Berkualitas</h2>
+                    <p class="text-slate-600 mb-8 leading-relaxed text-lg italic">
+                        "Selamat datang di portal SPMB Online SD Negeri 3 Induha. Kami berkomitmen untuk menyelenggarakan proses seleksi yang transparan dan akuntabel demi menjaring calon murid berpotensi yang siap kami bimbing menjadi generasi berakhlak mulia dan cerdas."
+                    </p>
+                    <div class="flex items-center gap-4 mb-10">
+                        <div class="w-16 h-1 bg-primary rounded-full"></div>
+                        <div>
+                            <p class="font-black text-xl text-accent leading-none">MASDAFIK. S.Pd.,M.Pd</p>
+                            <p class="text-xs font-bold text-slate-400 uppercase tracking-widest mt-2">Kepala Sekolah SD Negeri 3 Induha</p>
+                        </div>
+                    </div>
+                    <div class="grid sm:grid-cols-2 gap-6">
+                        <div class="flex items-start gap-4 p-4 bg-blue-50 rounded-2xl border border-blue-100">
+                            <div class="w-10 h-10 bg-white text-primary rounded-xl flex items-center justify-center shrink-0 shadow-sm">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-900 text-sm">Transparansi</h4>
+                                <p class="text-xs text-slate-500">Proses seleksi online yang jujur dan terbuka.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4 p-4 bg-yellow-50 rounded-2xl border border-yellow-100">
+                            <div class="w-10 h-10 bg-white text-gold rounded-xl flex items-center justify-center shrink-0 shadow-sm">
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-900 text-sm">Kualitas</h4>
+                                <p class="text-xs text-slate-500">Mencetak lulusan yang cerdas dan mandiri.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Vision & Mission Section (Dedicated Section) -->
+    <section id="visi-misi" class="py-20 bg-neutralbg relative overflow-hidden border-y border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-primary font-bold tracking-widest uppercase text-sm mb-2 block tracking-[0.2em]">Cita-Cita & Langkah</span>
+                <h2 class="text-4xl font-extrabold text-accent mb-4">Visi & Misi Sekolah</h2>
+                <div class="w-24 h-1.5 bg-gold mx-auto rounded-full"></div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-12 max-w-5xl mx-auto">
+                <!-- Visi -->
+                <div class="bg-white rounded-3xl p-10 shadow-lg border border-white relative group hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2">
+                    <div class="absolute -right-4 -top-4 w-20 h-20 bg-primary/5 rounded-full flex items-center justify-center text-primary/10 text-5xl group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-eye"></i>
+                    </div>
+                    <div class="w-14 h-14 bg-primary text-white rounded-2xl flex items-center justify-center text-xl shadow-lg shadow-primary/30 mb-8">
+                        V
+                    </div>
+                    <h3 class="text-2xl font-bold text-accent mb-4">Visi Sekolah</h3>
+                    <p class="text-gray-600 leading-relaxed text-lg italic font-medium">
+                        "Mewujudkan peserta didik yang berakhlak mulia, cerdas, terampil, dan mandiri."
+                    </p>
+                </div>
+
+                <!-- Misi -->
+                <div class="bg-white rounded-3xl p-10 shadow-lg border border-white relative group hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2">
+                    <div class="absolute -right-4 -top-4 w-20 h-20 bg-gold/5 rounded-full flex items-center justify-center text-gold/10 text-5xl group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-bullseye"></i>
+                    </div>
+                    <div class="w-14 h-14 bg-gold text-white rounded-2xl flex items-center justify-center text-xl shadow-lg shadow-gold/30 mb-8">
+                        M
+                    </div>
+                    <h3 class="text-2xl font-bold text-accent mb-4">Misi Sekolah</h3>
+                    <ul class="space-y-4 text-gray-600 leading-relaxed">
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-circle-check text-green-500 mt-1"></i>
+                            <span>Meningkatkan kualitas pembelajaran melalui inovasi pendidikan.</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-circle-check text-green-500 mt-1"></i>
+                            <span>Pembentukan karakter Islami serta berbudaya.</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-circle-check text-green-500 mt-1"></i>
+                            <span>Menumbuhkan semangat kemandirian dan keterampilan praktis.</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Countdown Section -->
+    <section class="py-12 bg-accent relative overflow-hidden border-t-4 border-gold">
+        <div class="absolute inset-0 opacity-10"
+            style="background-image: radial-gradient(circle at 2px 2px, white 1px, transparent 0); background-size: 32px 32px;">
+        </div>
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+            <h2 class="text-2xl lg:text-3xl font-bold text-white mb-8">Batas Waktu Pendaftaran:</h2>
+            <div class="flex justify-center gap-4 sm:gap-8">
+                <div class="bg-white rounded-lg p-4 sm:p-6 w-20 sm:w-28 border-b-4 border-gray-300 shadow-lg">
+                    <div id="days" class="text-3xl sm:text-4xl font-extrabold text-accent mb-1">00</div>
+                    <div class="text-[10px] sm:text-xs text-gray-500 font-bold uppercase tracking-wider">Hari</div>
+                </div>
+                <div class="bg-white rounded-lg p-4 sm:p-6 w-20 sm:w-28 border-b-4 border-gray-300 shadow-lg">
+                    <div id="hours" class="text-3xl sm:text-4xl font-extrabold text-accent mb-1">00</div>
+                    <div class="text-[10px] sm:text-xs text-gray-500 font-bold uppercase tracking-wider">Jam</div>
+                </div>
+                <div class="bg-white rounded-lg p-4 sm:p-6 w-20 sm:w-28 border-b-4 border-gray-300 shadow-lg">
+                    <div id="minutes" class="text-3xl sm:text-4xl font-extrabold text-accent mb-1">00</div>
+                    <div class="text-[10px] sm:text-xs text-gray-500 font-bold uppercase tracking-wider">Menit</div>
+                </div>
+                <div class="bg-white rounded-lg p-4 sm:p-6 w-20 sm:w-28 border-b-4 border-gray-300 shadow-lg">
+                    <div id="seconds" class="text-3xl sm:text-4xl font-extrabold text-govred mb-1">00</div>
+                    <div class="text-[10px] sm:text-xs text-gray-500 font-bold uppercase tracking-wider">Detik</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Registration Information Cards -->
+    <section id="info" class="py-20 bg-neutralbg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-primary font-bold tracking-widest uppercase text-sm mb-2 block">Panduan Resmi</span>
+                <h2 class="text-3xl font-bold text-accent mb-4">Informasi Pendaftaran</h2>
+                <div class="w-24 h-1 bg-gold mx-auto rounded-full mb-6"></div>
+                <p class="text-gray-600">Pelajari segala kebutuhan dan jadwal untuk proses penerimaan siswa baru SD Negeri 3 Induha tahun ajaran 2025/2026.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Requirements -->
+                <div
+                    class="bg-white rounded-xl p-8 shadow-sm hover:shadow-xl transition-all duration-300 border-t-4 border-primary group">
+                    <div
+                        class="w-16 h-16 bg-blue-50 rounded-full flex items-center justify-center text-primary text-2xl mb-6 group-hover:bg-primary group-hover:text-white transition-colors duration-300">
+                        <i class="fa-regular fa-file-lines"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-accent mb-4">Persyaratan Dokumen</h3>
+                    <ul class="space-y-3 text-sm text-gray-600">
+                        <li class="flex items-start gap-3"><i class="fa-solid fa-check text-green-500 mt-1"></i>
+                            <span>Akta Kelahiran</span>
+                        </li>
+                        <li class="flex items-start gap-3"><i class="fa-solid fa-check text-green-500 mt-1"></i>
+                            <span>Kartu Keluarga</span>
+                        </li>
+                        <li class="flex items-start gap-3"><i class="fa-solid fa-check text-green-500 mt-1"></i>
+                            <span>Pas Foto</span>
+                        </li>
+                        <li class="flex items-start gap-3"><i class="fa-solid fa-check text-green-500 mt-1"></i>
+                            <span>Batas Umur 6 Thn / 1 Juli 2025</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Schedule -->
+                <div
+                    class="bg-white rounded-xl p-8 shadow-sm hover:shadow-xl transition-all duration-300 border-t-4 border-gold group">
+                    <div
+                        class="w-16 h-16 bg-yellow-50 rounded-full flex items-center justify-center text-gold text-2xl mb-6 group-hover:bg-gold group-hover:text-white transition-colors duration-300">
+                        <i class="fa-regular fa-calendar-days"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-accent mb-4">Jadwal SPMB</h3>
+                    <ul class="space-y-4 text-sm text-gray-600">
+                        <li class="flex justify-between border-b border-gray-100 pb-2">
+                            <span>Tanggal Pendaftaran</span> <span class="font-bold text-accent">12 Juni 2025</span>
+                        </li>
+                        <li class="flex justify-between border-b border-gray-100 pb-2">
+                            <span>Pukul / Waktu</span> <span class="font-bold text-accent">08:30 Wita</span>
+                        </li>
+                        <li class="flex justify-between border-b border-gray-100 pb-2">
+                            <span>Tempat</span> <span class="font-bold text-accent">SD Negeri 3 Induha</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Pengembalian Formulir -->
+                <div
+                    class="bg-white rounded-xl p-8 shadow-sm hover:shadow-xl transition-all duration-300 border-t-4 border-govred group">
+                    <div
+                        class="w-16 h-16 bg-red-50 rounded-full flex items-center justify-center text-govred text-2xl mb-6 group-hover:bg-govred group-hover:text-white transition-colors duration-300">
+                        <i class="fa-solid fa-folder-open"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-accent mb-4">Pengembalian Formulir</h3>
+                    <ul class="space-y-2 text-xs text-gray-600">
+                        <li class="flex items-start gap-2"><i class="fa-solid fa-check text-green-500 mt-0.5"></i> Membawa formulir pendaftaran</li>
+                        <li class="flex items-start gap-2"><i class="fa-solid fa-check text-green-500 mt-0.5"></i> Pas Foto 3x4 cm (2 lembar)</li>
+                        <li class="flex items-start gap-2"><i class="fa-solid fa-check text-green-500 mt-0.5"></i> Fotokopi KK & Akte Kelahiran</li>
+                        <li class="text-govred font-bold">Laki-laki: Map bertulang merah</li>
+                        <li class="text-yellow-600 font-bold">Perempuan: Map bertulang kuning</li>
+                        <li class="mt-2 text-gray-500 italic">Kartu KIP (Jika Ada)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Registration Flow (Horizontal Timeline) -->
+    <section id="flow" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-3xl font-bold text-accent mb-4">Alur Pendaftaran Online</h2>
+                <div class="w-24 h-1 bg-primary mx-auto rounded-full mb-6"></div>
+                <p class="text-gray-600">Sistem pendaftaran dirancang transparan dan terintegrasi untuk memudahkan
+                    masyarakat Kabupaten Kolaka.</p>
+            </div>
+
+            <!-- Timeline -->
+            <div class="relative py-10">
+                <!-- Line -->
+                <div class="hidden md:block absolute top-[45px] left-0 w-full h-1.5 bg-gray-100 rounded-full">
+                    <div class="h-full bg-primary rounded-full transition-all duration-1000 w-full"
+                        style="width: 50%; background: linear-gradient(90deg, #0284C7 0%, #1E3A8A 100%);"></div>
+                </div>
+
+                <div class="grid md:grid-cols-5 gap-8">
+                    <!-- Step 1 -->
+                    <div class="relative text-center group">
+                        <div
+                            class="w-16 h-16 mx-auto bg-accent text-white rounded-full flex items-center justify-center text-xl font-bold shadow-lg mb-6 relative z-10 transition-transform group-hover:scale-110 border-4 border-white">
+                            1
+                        </div>
+                        <h4 class="font-bold text-accent mb-2">Daftar Online</h4>
+                        <p class="text-xs text-gray-500">Isi NIK dan formulir pendaftaran digital dengan benar.</p>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="relative text-center group">
+                        <div
+                            class="w-16 h-16 mx-auto bg-primary text-white rounded-full flex items-center justify-center text-xl font-bold shadow-lg mb-6 relative z-10 transition-transform group-hover:scale-110 border-4 border-white">
+                            2
+                        </div>
+                        <h4 class="font-bold text-accent mb-2">Terima ID</h4>
+                        <p class="text-xs text-gray-500">Dapatkan ID Registrasi & Cetak Bukti Pendaftaran.</p>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="relative text-center group">
+                        <div
+                            class="w-16 h-16 mx-auto bg-white border-[5px] border-primary text-primary rounded-full flex items-center justify-center text-xl font-bold mb-6 relative z-10 transition-transform group-hover:scale-110">
+                            3
+                        </div>
+                        <h4 class="font-bold text-accent mb-2">Verifikasi Sekolah</h4>
+                        <p class="text-xs text-gray-500">Bawa berkas fisik ke sekolah tujuan untuk divalidasi.</p>
+                    </div>
+
+                    <!-- Step 4 -->
+                    <div class="relative text-center group">
+                        <div
+                            class="w-16 h-16 mx-auto bg-white border-[5px] border-gray-200 text-gray-400 rounded-full flex items-center justify-center text-xl font-bold mb-6 relative z-10 transition-transform group-hover:scale-110">
+                            4
+                        </div>
+                        <h4 class="font-bold text-gray-500 mb-2">Proses Seleksi</h4>
+                        <p class="text-xs text-gray-500">Sistem melakukan perankingan otomatis sesuai jalur.</p>
+                    </div>
+
+                    <!-- Step 5 -->
+                    <div class="relative text-center group">
+                        <div
+                            class="w-16 h-16 mx-auto bg-white border-[5px] border-gray-200 text-gray-400 rounded-full flex items-center justify-center text-xl font-bold mb-6 relative z-10 transition-transform group-hover:scale-110">
+                            5
+                        </div>
+                        <h4 class="font-bold text-gray-500 mb-2">Pengumuman</h4>
+                        <p class="text-xs text-gray-500">Hasil seleksi diumumkan secara transparan di portal ini.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-12">
+                <a href="registration.html"
+                    class="inline-flex items-center gap-2 bg-primary hover:bg-accent text-white px-8 py-3 rounded-lg font-bold transition-all shadow-md mt-4 text-sm uppercase tracking-wider">
+                    Daftar Sekarang <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Support Center -->
+    <section class="py-16 bg-neutralbg border-t border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div
+                class="bg-gradient-to-r from-accent to-blue-900 rounded-2xl overflow-hidden shadow-2xl flex flex-col md:flex-row items-center justify-between p-8 md:p-12 relative">
+                <!-- Watermark -->
+                <i class="fa-solid fa-headset absolute -right-10 -top-10 text-[15rem] text-white opacity-5"></i>
+
+                <div class="text-white relative z-10 md:w-2/3 mb-8 md:mb-0 text-center md:text-left">
+                    <h2 class="text-3xl font-bold mb-4 uppercase">Narahubung SPMB</h2>
+                    <div class="grid sm:grid-cols-2 gap-6 text-sm mb-8">
+                        <div>
+                            <p class="font-bold text-gold">Ussin, S.Pd</p>
+                            <p class="text-blue-200">0852 4233 7987</p>
+                        </div>
+                        <div>
+                            <p class="font-bold text-gold">A. Irma Suriantih, S.Pd., Gr</p>
+                            <p class="text-blue-200">0852 9958 5946</p>
+                        </div>
+                        <div>
+                            <p class="font-bold text-gold">A. Ikhwanuddin, S.Pd</p>
+                            <p class="text-blue-200">0822 1783 2599</p>
+                        </div>
+                        <div>
+                            <p class="font-bold text-gold">Hasnawati, S.Pd., Gr</p>
+                            <p class="text-blue-200">0853 4269 5514</p>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap items-center justify-center md:justify-start gap-6">
+                        <div class="flex items-center gap-3">
+                            <i class="fa-solid fa-location-dot text-gold text-xl"></i>
+                            <div>
+                                <p class="text-xs text-blue-200 uppercase tracking-widest font-bold">Lokasi Sekolah</p>
+                                <p class="text-lg font-bold">SD Negeri 3 Induha</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="relative z-10 shrink-0">
+                    <a href="#"
+                        class="bg-white text-accent hover:bg-gold hover:text-white hover:border-gold border-2 border-white px-8 py-4 rounded-xl font-bold transition-all flex items-center gap-2 shadow-lg">
+                        <i class="fa-solid fa-comments"></i> Hubungi Bantuan
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-[#0B1B3D] text-white pt-16 pb-8 border-t-[6px] border-gold">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8 mb-12">
+                <div class="col-span-1 md:col-span-2">
+                    <div class="flex items-center gap-4 mb-6">
+                        <img src="logo_kolaka.png" alt="Kolaka" class="h-14">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/9/9c/Logo_of_Ministry_of_Education_and_Culture_of_Republic_of_Indonesia.svg"
+                            alt="Tut Wuri Handayani" class="h-12">
+                    </div>
+                    <h3 class="font-poppins font-bold text-xl text-white mb-2">Pemerintah Kabupaten Kolaka</h3>
+                    <p class="font-semibold text-primary mb-4">Dinas Pendidikan dan Kebudayaan</p>
+                    <p class="text-gray-400 max-w-sm text-sm leading-relaxed mb-6">
+                        Penyelenggara layanan Pendaftaran Peserta Didik Baru (SPMB) terpusat, transparan, dan akuntabel
+                        untuk seluruh sekolah dasar dan menengah di wilayah Kabupaten Kolaka.
+                    </p>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-lg mb-6 border-b border-blue-800 pb-2 inline-block">Menu Cepat</h4>
+                    <ul class="space-y-3 text-sm">
+                        <li><a href="#home"
+                                class="text-gray-400 hover:text-primary transition-colors flex items-center gap-2"><i
+                                    class="fa-solid fa-angle-right text-xs"></i> Portal Utama</a></li>
+                        <li><a href="#pimpinan"
+                                class="text-gray-400 hover:text-primary transition-colors flex items-center gap-2"><i
+                                    class="fa-solid fa-angle-right text-xs"></i> Profil Pimpinan</a></li>
+                        <li><a href="#info"
+                                class="text-gray-400 hover:text-primary transition-colors flex items-center gap-2"><i
+                                    class="fa-solid fa-angle-right text-xs"></i> Juknis SPMB Download</a></li>
+                        <li><a href="admin-login.html"
+                                class="text-gray-400 hover:text-gold transition-colors flex items-center gap-2 mt-4 font-bold"><i
+                                    class="fa-solid fa-lock text-xs"></i> Login Admin Sekolah</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-lg mb-6 border-b border-blue-800 pb-2 inline-block">Informasi Kontak</h4>
+                    <ul class="space-y-4 text-sm text-gray-400">
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-location-dot mt-1 text-primary"></i>
+                            <span>Kompleks Perkantoran Pemda Kolaka, Jl. Merdeka No. 1, Kolaka, Sulawesi Tenggara</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fa-solid fa-phone text-primary"></i>
+                            <span>Call Center: 1500-123</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fa-solid fa-envelope text-primary"></i>
+                            <span>dikbud@kolakakab.go.id</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div
+                class="border-t border-blue-900/50 pt-8 flex flex-col md:flex-row justify-between items-center text-xs">
+                <p class="text-gray-500 mb-4 md:mb-0">
+                    &copy; 2026 Dinas Pendidikan dan Kebudayaan Kabupaten Kolaka. Hak cipta dilindungi undang-undang.
+                </p>
+                <div class="flex gap-4 text-gray-500">
+                    <a href="#" class="hover:text-white transition-colors">Kebijakan Privasi</a>
+                    <span class="text-gray-700">|</span>
+                    <a href="#" class="hover:text-white transition-colors">Syarat & Ketentuan</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 40) {
+                navbar.classList.add('shadow-lg');
+                navbar.classList.remove('shadow-md');
+            } else {
+                navbar.classList.add('shadow-md');
+                navbar.classList.remove('shadow-lg');
+            }
+        });
+
+        // Mobile menu toggle
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+
+        // Countdown Timer
+        const countDownDate = new Date("Jun 30, 2026 23:59:59").getTime();
+        const timer = setInterval(function () {
+            const now = new Date().getTime();
+            const distance = countDownDate - now;
+
+            if (distance < 0) {
+                clearInterval(timer);
+                document.getElementById("days").innerHTML = "00";
+                document.getElementById("hours").innerHTML = "00";
+                document.getElementById("minutes").innerHTML = "00";
+                document.getElementById("seconds").innerHTML = "00";
+
+                // Disable register buttons
+                const regBtns = document.querySelectorAll('.register-btn');
+                regBtns.forEach(btn => {
+                    btn.classList.add('opacity-50', 'cursor-not-allowed');
+                    btn.classList.remove('hover:bg-blue-900', 'hover:-translate-y-0.5', 'hover:shadow-lg');
+                    btn.href = "#";
+                    btn.innerHTML = "Pendaftaran Ditutup";
+                });
+                return;
+            }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById("days").innerHTML = days < 10 ? "0" + days : days;
+            document.getElementById("hours").innerHTML = hours < 10 ? "0" + hours : hours;
+            document.getElementById("minutes").innerHTML = minutes < 10 ? "0" + minutes : minutes;
+            document.getElementById("seconds").innerHTML = seconds < 10 ? "0" + seconds : seconds;
+        }, 1000);
+    </script>
+</body>
+
+</html>
